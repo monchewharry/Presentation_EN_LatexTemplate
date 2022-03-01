@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright 2011-2012 by Fiandrino Claudio
+% 
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright 2021 by Fabio Pagnotta
+% 
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode<presentation>
+
+% Blue
+\definecolor{navyblue}{RGB}{11,59,96}
+\definecolor{red}{RGB}{249,0,18} % {cmyk}{0.94,0.11,0,0}
+\definecolor{processblue}{RGB}{11,59,96}
+
+\DeclareOptionBeamer{color}{\def\beamer@unicamth@defcolor{#1}}
+\ExecuteOptionsBeamer{color=blue}
+
+\ProcessOptionsBeamer
+
+% Blue colors
+\def\beamer@unicamth@bluetext{blue}%
+\ifx\beamer@unicamth@defcolor\beamer@unicamth@bluetext%
+
+  \setbeamercolor*{palette primary}{fg=white,bg=processblue!90}
+  \setbeamercolor*{palette secondary}{fg=black!20,bg=red!20}
+  \setbeamercolor*{palette light}{fg=gray!20,bg=white}
+  
+  \setbeamercolor*{titlelike}{fg=white,bg=processblue!80}
+  \setbeamercolor*{frametitle}{fg=black,bg=black}
+  \setbeamercolor*{item}{fg=red}
+  \setbeamercolor*{alerted text}{fg=red}
+  \def\beamer@unicamth@color{}
+  
+  \setbeamercolor{block body}{fg=black,bg=processblue!10}
+  \setbeamercolor{block body alerted}{fg=black,bg=processblue!10}
+  \setbeamercolor{block body example}{use=block title,fg=black,bg=processblue!10}
+  \setbeamercolor{block title}{bg=processblue,fg=white}
+  \setbeamercolor{block title alerted}{bg=processblue,fg=white}
+  \setbeamercolor{block title example}{bg=processblue,fg=white}
+
+\fi%
+
+% Innertheme colors
+\setbeamercolor*{title page header}{parent=palette primary}
+\setbeamercolor*{ateneo page header}{parent=palette primary}
+
+% Outertheme colors
+\setbeamercolor*{footerbox}{parent=palette secondary}
+\setbeamercolor*{titleline}{parent=palette primary}
+\setbeamercolor*{page header}{parent=titlelike}
+\setbeamercolor*{second header}{parent=palette secondary}
+\setbeamercolor*{frame number}{parent=palette light}
+
+\setbeamercolor*{separation line}{bg=white}
+\setbeamercolor*{fine separation line}{bg=white}
+
+\mode
+<all>

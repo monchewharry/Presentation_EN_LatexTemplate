@@ -1,0 +1,141 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright 2011-2012 by Fiandrino Claudio
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Copyright 2021 by Fabio Pagnotta
+% 
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode<presentation>
+
+% Options
+\DeclareOptionBeamer{language}{\PassOptionsToPackage{language=#1}{beamerinnerthemeunicamth}\def\beamer@unicamth@language{#1}}
+\DeclareOptionBeamer{titlepagelogo}{\PassOptionsToPackage{titlepagelogo=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{bullet}{\PassOptionsToPackage{bullet=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{pageofpages}{\PassOptionsToPackage{pageofpages=#1}{beamerouterthemeunicamth}}
+\DeclareOptionBeamer{titleline}[false]{\PassOptionsToPackage{titleline=#1}{beamerouterthemeunicamth}}
+\DeclareOptionBeamer{color}{\PassOptionsToPackage{color=#1}{beamercolorthemeunicamth}}
+\DeclareOptionBeamer{secondcandidate}[true]{\PassOptionsToPackage{secondcandidate=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{secondsupervisor}[true]{\PassOptionsToPackage{secondsupervisor=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{secondlogo}[true]{\PassOptionsToPackage{secondlogo=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{thirdlogo}[true]{\PassOptionsToPackage{thirdlogo=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{assistantsupervisor}[true]{\PassOptionsToPackage{assistantsupervisor=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{secondassistantsupervisor}[true]{\PassOptionsToPackage{secondassistantsupervisor=#1}{beamerinnerthemeunicamth}}
+\DeclareOptionBeamer{notshowauthor}[true]{\PassOptionsToPackage{notshowauthor=#1}{beamerouterthemeunicamth}}
+\DeclareOptionBeamer{coding}{\def\beamer@unicamth@coding{#1}}
+\ExecuteOptionsBeamer{coding=utf8x}
+\ProcessOptionsBeamer
+
+% Packages
+\RequirePackage{ifxetex}%
+\RequirePackage{pifont}%
+\ifxetex
+  \RequirePackage{fontspec}%
+  \defaultfontfeatures{Mapping=tex-text}%
+  \RequirePackage{xunicode}% 
+  \RequirePackage{xltxtra}%
+  \RequirePackage{metalogo}%
+  \RequirePackage{xkeyval}%
+  \RequirePackage{polyglossia}%
+\else
+  \RequirePackage[\beamer@unicamth@coding]{inputenc}%
+  \RequirePackage{metalogo}% only for \XeTeX and \XeLaTeX logos
+\fi
+
+% Disable insertshorttitle link
+\renewcommand\insertshorttitle[1][]{%
+  \beamer@setupshort{#1}%
+  \let\thanks=\@gobble%
+  \beamer@insertshort{\beamer@shorttitle}%
+  }
+
+% Language
+\def\beamer@unicamth@subject{}%
+\def\beamer@unicamth@italiantext{italian}%
+\def\beamer@unicamth@englishtext{english}%
+  \ifx\beamer@unicamth@language\beamer@unicamth@italiantext%
+    \renewcommand\beamer@unicamth@subject{Presentazione Tesi di Laurea}%
+    \ifxetex
+      \setmainlanguage{italian}%
+    \else
+      \RequirePackage[italian]{babel}%
+    \fi
+  \fi%
+  
+  \ifx\beamer@unicamth@language\beamer@unicamth@englishtext%
+    \renewcommand\beamer@unicamth@subject{Thesis Presentation}%
+    \ifxetex
+      \setmainlanguage[variant=british]{english}%
+    \else
+      \RequirePackage[english]{babel}%
+    \fi%
+  \else%
+   \def\setsubject#1{\gdef\@setsubject{#1}}%
+   \def\@setsubject{\PackageError{Beamer2Thesis}%
+   {\protect\setsubject\space not given. Please insert it}%
+   {Example in english: \protect\setsubject{Thesis Presentation}}
+   }   
+   \renewcommand\beamer@unicamth@subject{\@setsubject}%
+    \ifxetex
+      \setmainlanguage{\beamer@unicamth@language}%
+    \else
+      \RequirePackage[\beamer@unicamth@language]{babel}%
+    \fi%    
+  \fi%
+
+% General settings
+\useinnertheme{unicamth}
+\useoutertheme{unicamth}
+\usecolortheme{unicamth}
+\usefonttheme{unicamth}
+
+\setbeamertemplate{navigation symbols}{}
+
+% Environment
+\newenvironment{tframe}{
+\begin{frame}[t]}{\end{frame}}
+
+% Titleapageframe command
+\newcommand{\titlepageframe}{
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+}
+
+% Highlight a single word
+\newcommand{\highlight}[1]{{\it{\color{alerted text.fg}{#1}}}}
+\newcommand{\highlightbf}[1]{{\bf\color{alerted text.fg}{#1}}}
+
+% Define hypersetup
+\hypersetup{%
+    colorlinks=true,
+    hyperindex=true,
+    plainpages=false,
+    urlcolor=alerted text.fg,
+    linkcolor=alerted text.fg,
+    pdfinfo={%
+        Title={\inserttitle},%
+        Author={\insertauthor},%
+        Subject={\beamer@unicamth@subject},%
+    }
+}
+
+% Blocks
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\mode
+<all>
