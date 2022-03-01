@@ -1,0 +1,15 @@
+.DS_Store
+*.pdf
+*.log
+*.fls
+*.gz
+*.toc
+*.aux
+*.fdb_latexmk
+*.out
+*.bbl
+*.blg
+# beamer latex
+*.snm
+*.vrb
+*.nav
