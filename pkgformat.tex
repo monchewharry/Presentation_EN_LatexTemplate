@@ -1,0 +1,28 @@
+\makeatletter
+\def\beamer@calltheme#1#2#3{%
+\def\beamer@themelist{#2}
+\@for\beamer@themename:=\beamer@themelist\do
+{\usepackage[{#1}]{\beamer@themelocation/#3\beamer@themename}}}
+
+\def\usefolder#1{
+\def\beamer@themelocation{#1}
+}
+\def\beamer@themelocation{}
+
+\usefolder{theme}
+\usetheme[titlepagelogo=images/unicam,% Logo for the first page
+		language=english
+        ]{UnicamTh}    
+\usepackage[beamer,customcolors]{hf-tikz}
+
+\hfsetfillcolor{alerted text.fg!10}
+\hfsetbordercolor{alerted text.fg}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = false,
+    linkbordercolor = {white}
+}
+\usepackage[authoryear,round]{natbib}
+\setcitestyle{citesep={,},aysep={}}
+
